@@ -37,9 +37,6 @@ def hexor(first_hex="", second_hex=""):
     '''
 
     # recase hex to int so we can xor it
-    # first_int = int("1c0111001f010100061a024b53535009181c",16)
-    # second_int = int("686974207468652062756c6c277320657965",16)
-
     first_int = int(first_hex,16)
     second_int = int(second_hex,16)
 
