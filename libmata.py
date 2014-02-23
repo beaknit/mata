@@ -51,6 +51,10 @@ def xor_encrypt(key="", plain_text=""):
     :param plain_text: Text to encrypt
     :type plain_text: string
     :returns:  hex string
+
+    >>> import libmata
+    >>> libmata.xor_encrypt('PPPPPPPPPPPPPPPP','This is a string')
+    '4383923703923703170232422393e37'
     '''
     int_key = string_to_int(key)
 
@@ -71,6 +75,10 @@ def xor_decrypt(key="", hex_text=""):
     :param hex_text: Text to decrypt
     :type hex_text: HEX string
     :returns:  string
+
+    >>> import libmata
+    >>> libmata.xor_decrypt('PPPPPPPPPPPPPPPP','4383923703923703170232422393e37')
+    'This is a string'
     '''
     import binascii
 
