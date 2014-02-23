@@ -25,10 +25,10 @@ def hexor(first_hex="", second_hex=""):
     r'''Take two hex strings and xor them
 
     Arguments:
-    :param first: input string
-    :type first: hex string
-    :param second: input string
-    :type second: hex string
+    :param first_hex: input string
+    :type first: HEX string
+    :param second_hex: input string
+    :type second: HEX string
     :returns: hex string
 
     >>> import libmata
@@ -43,7 +43,15 @@ def hexor(first_hex="", second_hex=""):
     return hex(first_int ^ second_int)
 
 def xor_encrypt(key="", plain_text=""):
+    r'''Accept a key and use it to xor encrypt a plain text string
 
+    Arguments:
+    :param key: Encryption key
+    :type key: string
+    :param plain_text: Text to encrypt
+    :type plain_text: string
+    :returns:  hex string
+    '''
     int_key = string_to_int(key)
 
     int_text = string_to_int(plain_text)
@@ -55,6 +63,15 @@ def xor_encrypt(key="", plain_text=""):
     return hexd_string
 
 def xor_decrypt(key="", hex_text=""):
+    r'''Accept a key and use it to xor decrypt an encrypted hex string
+
+    Arguments:
+    :param key: Encryption key
+    :type key: string
+    :param hex_text: Text to decrypt
+    :type hex_text: HEX string
+    :returns:  string
+    '''
     import binascii
 
     int_key = string_to_int(key)
@@ -69,8 +86,14 @@ def xor_decrypt(key="", hex_text=""):
 
     return plain_text
 
-def string_to_int(input=""):
+def string_to_int(input):
+    r'''Convert a string to an integer by way of hexadecimal
 
+    Arguments:
+    :param input: String to convert
+    :type input: string
+    :returns: integer OR long
+    '''
     import binascii
 
     hex_input = binascii.hexlify(input)
@@ -80,7 +103,13 @@ def string_to_int(input=""):
     return int_input
 
 def hex_to_int(input):
+    r'''Convert a hex to an integer
 
+    Arguments:
+    :param input: HEX string to convert
+    :type input: HEX string
+    :returns: integer OR long
+    '''
     int_input = int(input, 16)
 
     return int_input
