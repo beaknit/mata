@@ -33,14 +33,16 @@ def hexor(first_hex="", second_hex=""):
 
     >>> import libmata
     >>> libmata.hexor(first_hex=b'1c0111001f010100061a024b53535009181c', second_hex=b'686974207468652062756c6c277320657965')
-    '0x746865206b696420646f6e277420706c6179L'
+    '746865206b696420646f6e277420706c6179'
     '''
 
     # recase hex to int so we can xor it
     first_int = int(first_hex,16)
     second_int = int(second_hex,16)
 
-    return hex(first_int ^ second_int)
+    hex_result = '%x' % (first_int ^ second_int)
+
+    return hex_result
 
 def xor_encrypt(key="", plain_text=""):
     r'''Accept a key and use it to xor encrypt a plain text string
