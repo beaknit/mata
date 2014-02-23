@@ -17,9 +17,7 @@ import libmata
 
 input_string = 'This is a string'
 
-int_input = libmata.string_to_int(input_string)
-
-reg_len = len(input_string)
+key_len = len(input_string)
 
 #int_input = int('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736', 16)
 
@@ -32,10 +30,10 @@ numbers = list(string.digits)
 alpha_nums = alphas + numbers
 
 # 1.1.1 Pad to the length of the text to encrypt
-raw_alpha_nums = [x * reg_len for x in alpha_nums]
+raw_alpha_nums = [x * key_len for x in alpha_nums]
 
 # 1.3 Encrypt plain text with list of keys
-hexd_strings = [libmata.xor_encrypt(key=x, plain_text='This is a string') for x in raw_alpha_nums]
+hexd_strings = [libmata.xor_encrypt(key=x, plain_text=input_string) for x in raw_alpha_nums]
 
 # 2.  Print hex, key and decrypt
 
