@@ -13,11 +13,11 @@
 # Tune your algorithm until this works.
 
 import string
-import binascii
+import libmata
 
 input_string = 'This is a string'
 
-int_input = int(binascii.hexlify(input_string), 16)
+int_input = libmata.string_to_int(input_string)
 
 reg_len = len(input_string)
 
@@ -29,26 +29,15 @@ reg_len = len(input_string)
 # 1.1 Create the set of all alphas
 alphas = list(string.ascii_letters)
 numbers = list(string.digits)
-
 alpha_nums = alphas + numbers
 
+# 1.1.1 Pad to the length of the text to encrypt
 raw_alpha_nums = [x * reg_len for x in alpha_nums]
 
-# 1.2 Convert that ascii to hex
-hex_alpha_nums = [binascii.hexlify(x) for x in raw_alpha_nums]
+# 1.3 Encrypt plain text with list of keys
+hexd_strings = [libmata.xor_encrypt(key=x, plain_text='This is a string') for x in raw_alpha_nums]
 
-int_alpha_nums = [int(x,16) for x in hex_alpha_nums]
+# 2.  Print hex, key and decrypt
 
-# 1.3 XOR int of input_string with int of hex_alpha_nums
-xord_int_strings = [int_input ^ x for x in int_alpha_nums]
-
-hexd_strings = [ '%x' % x for x in xord_int_strings]
-
-# 2.  unhex it (binascii.unhexlify)
-
-int_unhexd_strings = [int(x,16) for x in hexd_strings]
-
-#dexord_int_strings = map(lambda l:, sequence)
-
-for x in range(len(int_unhexd_strings)):
-    print str(hexd_strings[x]) + " - " + str(raw_alpha_nums[x]) + " = " + str(binascii.unhexlify("%x" % (int_unhexd_strings[x] ^ int_alpha_nums[x])))
+for x in range(len(hexd_strings)):
+    print str(hexd_strings[x]) + " - " + str(raw_alpha_nums[x]) + " = " + libmata.xor_decrypt(key=raw_alpha_nums[x], hex_text=hexd_strings[x])
