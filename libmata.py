@@ -41,3 +41,46 @@ def hexor(first_hex="", second_hex=""):
     second_int = int(second_hex,16)
 
     return hex(first_int ^ second_int)
+
+def xor_encrypt(key="", plain_text=""):
+
+    int_key = string_to_int(key)
+
+    int_text = string_to_int(plain_text)
+
+    xord_int_strings = int_key ^ int_text
+
+    hexd_string = '%x' % xord_int_strings
+
+    return hexd_string
+
+def xor_decrypt(key="", hex_text=""):
+    import binascii
+
+    int_key = string_to_int(key)
+
+    int_text = hex_to_int(hex_text)
+
+    xord_int_strings = int_key ^ int_text
+
+    hex_string = "%x" % xord_int_strings
+
+    plain_text = binascii.unhexlify(hex_string)
+
+    return plain_text
+
+def string_to_int(input=""):
+
+    import binascii
+
+    hex_input = binascii.hexlify(input)
+
+    int_input = hex_to_int(hex_input)
+
+    return int_input
+
+def hex_to_int(input):
+
+    int_input = int(input, 16)
+
+    return int_input
