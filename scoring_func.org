@@ -5,10 +5,10 @@
 ** TODO Trigram
 ** TODO Quadgram
 
-* TODO Create function to strip whitespace, punc, formatting
+* DONE Create function to strip whitespace, punc, formatting
 ** regex should return long string 
 
-* TODO Create function to determine which scoring profile to use
+* DONE Create function to determine which scoring profile to use
 ** Based on 50 unit minimum before next jump
 
 * TODO Create function to sign stripped text
