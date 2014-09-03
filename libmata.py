@@ -192,10 +192,26 @@ def single_char_xor_cipher_with_quads(hex_input):
                             return (x, decrypt, cleaned_decrypt, y, z)
 
 
-def naive_detect_single_char_xor(filename):
+def detect_single_char_xor(filename):
+    r'''Detect single-char XOR (Problem 4)
+    - Take in a file of encrypted strings terminated by newline
+    - Run the strings through the single-char xor decrypt
+    - Find the decrypt using quadgrams
+
+    Arguments:
+    :param filename: File with newline-terminated ciphertext
+    :type filename: newline-terminated file
+    :returns:  Decrypted base64-encoded string
+
+    >>> import libmata
+    >>> libmata.detect_single_char_xor('detect_single_char_xor_test_set.txt')
+    ('5', '55555555555Now that the party is jumping\n', 'Now that the party is jumping', 'THAT', 'PART')
+    '''
     with file(filename) as f:
-        s = f.read()
+        s = f.read().split("\n")
 
-    result = [single_char_xor_cipher_with_quads(x) for x in s.split("\n")]
+    result = [single_char_xor_cipher_with_quads(x) for x in s]
 
-    return result
+    for x in result:
+        if x:
+            return x
