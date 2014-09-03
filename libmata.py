@@ -141,7 +141,7 @@ def naive_single_char_xor_cipher(hex_input):
 
     >>> import libmata
     >>> libmata.naive_single_char_xor_cipher('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736')
-    XXXXXXXXXXXXXXXCooking MC's like a pound of bacon
+    "XXXXXXXXXXXXXXXCooking MC's like a pound of bacon"
     '''
     import string
 
@@ -151,4 +151,43 @@ def naive_single_char_xor_cipher(hex_input):
     for x in stringslist:
         decrypt = xor_decrypt(key=(x * input_len), hex_text=hex_input)
         if " " in decrypt:
-            print decrypt
+            return decrypt
+
+
+def single_char_xor_cipher_with_quads(hex_input):
+    r'''Single-character XOR Cipher (Problem 3)
+    - Take a hex-encoded string
+    - Read in ascii letters and top-1000 english quagrams
+    - Run an xor_decrypt with single-char-based key
+    - If quadram matches, test for white space
+    - If white space matches, return the result
+
+    Arguments:
+    :param hex_input: HEX string to decrypt
+    :type hex_input: HEX String
+    :returns: decrypted base64-encoded string
+
+    >>> import libmata
+    >>> libmata.single_char_xor_cipher_with_quads('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736')
+    "XXXXXXXXXXXXXXXCooking MC's like a pound of bacon"
+    '''
+    import string
+
+    stringslist = string.lowercase + string.uppercase
+    input_len = len(hex2base64(hex_input))
+    with file('top_1000_english_quadgrams.txt') as f:
+        quads = f.read().split("\n")
+
+    for x in stringslist:
+        decrypt = xor_decrypt(key=(x * input_len), hex_text=hex_input)
+        for y in quads:
+            if y in decrypt.upper():
+                if " " in decrypt:
+                    return decrypt
+
+
+def naive_detect_single_char_xor(filename):
+    with file(filename) as f:
+        s = f.read()
+
+    [single_char_xor_cipher_with_quads(x) for x in s.split("\n")]
