@@ -169,7 +169,7 @@ def single_char_xor_cipher_with_quads(hex_input):
 
     >>> import libmata
     >>> libmata.single_char_xor_cipher_with_quads('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736')
-    "XXXXXXXXXXXXXXXCooking MC's like a pound of bacon"
+    ("XXXXXXXXXXXXXXXCooking MC's like a pound of bacon", 'OUND')
     '''
     import string
 
@@ -183,11 +183,13 @@ def single_char_xor_cipher_with_quads(hex_input):
         for y in quads:
             if y in decrypt.upper():
                 if " " in decrypt:
-                    return decrypt
+                    return (decrypt, y)
 
 
 def naive_detect_single_char_xor(filename):
     with file(filename) as f:
         s = f.read()
 
-    [single_char_xor_cipher_with_quads(x) for x in s.split("\n")]
+    result = [single_char_xor_cipher_with_quads(x) for x in s.split("\n")]
+
+    return result
