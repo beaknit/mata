@@ -37,12 +37,13 @@ def hexor(first_hex="", second_hex=""):
     '''
 
     # recase hex to int so we can xor it
-    first_int = int(first_hex,16)
-    second_int = int(second_hex,16)
+    first_int = int(first_hex, 16)
+    second_int = int(second_hex, 16)
 
     hex_result = '%x' % (first_int ^ second_int)
 
     return hex_result
+
 
 def xor_encrypt(key="", plain_text=""):
     r'''Accept a key and use it to xor encrypt a plain text string
@@ -67,6 +68,7 @@ def xor_encrypt(key="", plain_text=""):
     hexd_string = '%x' % xord_int_strings
 
     return hexd_string
+
 
 def xor_decrypt(key="", hex_text=""):
     r'''Accept a key and use it to xor decrypt an encrypted hex string
@@ -96,6 +98,7 @@ def xor_decrypt(key="", hex_text=""):
 
     return plain_text
 
+
 def string_to_int(input):
     r'''Convert a string to an integer by way of hexadecimal
 
@@ -112,6 +115,7 @@ def string_to_int(input):
 
     return int_input
 
+
 def hex_to_int(input):
     r'''Convert a hex to an integer
 
@@ -123,3 +127,13 @@ def hex_to_int(input):
     int_input = int(input, 16)
 
     return int_input
+
+
+def single_char_xor_cipher(hex_input=""):
+    import string
+
+    stringslist = string.lowercase + string.uppercase
+    input_len = len(hex2base64(hex_input))
+
+    for x in stringslist:
+        print xor_decrypt(key=(x * input_len), hex_text=hex_input)
