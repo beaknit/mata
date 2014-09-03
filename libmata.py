@@ -156,6 +156,9 @@ def single_char_xor_cipher_with_quads(hex_input):
 
     for x in stringslist:
         decrypt = xor_decrypt(key=(x * input_len), hex_text=hex_input)
+        # Decrypts tend to be padded and that can skew the matches
+        # Create a pattern to detect key padding and strip it
+        # This regex says "Match everything BUT a repeated string of the key"
         pad_pattern = "[^" + x + "*].*"
         cleaned_decrypt_match = re.search(pad_pattern, decrypt)
         cleaned_decrypt = cleaned_decrypt_match.group(0)
