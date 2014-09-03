@@ -10,7 +10,6 @@ def hex2base64(hex_string=""):
     >>> import libmata
     >>> libmata.hex2base64(hex_string=b'49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d')
     'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t\n'
-    
     '''
 
     import binascii
@@ -21,8 +20,9 @@ def hex2base64(hex_string=""):
     # convert bytes to base64 and return it
     return binascii.b2a_base64(bin_unhex)
 
-def hexor(first_hex="", second_hex=""):
-    r'''Take two hex strings and xor them
+
+def fixed_xor(first_hex="", second_hex=""):
+    r'''Take two hex strings and xor them (Prob 2)
 
     Arguments:
     :param first_hex: input string
@@ -32,7 +32,7 @@ def hexor(first_hex="", second_hex=""):
     :returns: hex string
 
     >>> import libmata
-    >>> libmata.hexor(first_hex=b'1c0111001f010100061a024b53535009181c', second_hex=b'686974207468652062756c6c277320657965')
+    >>> libmata.fixed_xor(first_hex=b'1c0111001f010100061a024b53535009181c', second_hex=b'686974207468652062756c6c277320657965')
     '746865206b696420646f6e277420706c6179'
     '''
 
@@ -129,11 +129,26 @@ def hex_to_int(input):
     return int_input
 
 
-def single_char_xor_cipher(hex_input=""):
+def naive_single_char_xor_cipher(hex_input):
+    r'''Single-character XOR Cipher (Problem 3)
+    - Take a hex-encoded string
+    - Run an xor_decrypt with single-char-based key
+
+    Arguments:
+    :param hex_input: HEX string to decrypt
+    :type hex_input: HEX String
+    :returns: decrypted base64-encoded string
+
+    >>> import libmata
+    >>> libmata.naive_single_char_xor_cipher('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736')
+    XXXXXXXXXXXXXXXCooking MC's like a pound of bacon
+    '''
     import string
 
     stringslist = string.lowercase + string.uppercase
     input_len = len(hex2base64(hex_input))
 
     for x in stringslist:
-        print xor_decrypt(key=(x * input_len), hex_text=hex_input)
+        decrypt = xor_decrypt(key=(x * input_len), hex_text=hex_input)
+        if " " in decrypt:
+            print decrypt
