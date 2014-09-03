@@ -129,31 +129,6 @@ def hex_to_int(input):
     return int_input
 
 
-def naive_single_char_xor_cipher(hex_input):
-    r'''Single-character XOR Cipher (Problem 3)
-    - Take a hex-encoded string
-    - Run an xor_decrypt with single-char-based key
-
-    Arguments:
-    :param hex_input: HEX string to decrypt
-    :type hex_input: HEX String
-    :returns: decrypted base64-encoded string
-
-    >>> import libmata
-    >>> libmata.naive_single_char_xor_cipher('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736')
-    "XXXXXXXXXXXXXXXCooking MC's like a pound of bacon"
-    '''
-    import string
-
-    stringslist = string.lowercase + string.uppercase
-    input_len = len(hex2base64(hex_input))
-
-    for x in stringslist:
-        decrypt = xor_decrypt(key=(x * input_len), hex_text=hex_input)
-        if " " in decrypt:
-            return decrypt
-
-
 def single_char_xor_cipher_with_quads(hex_input):
     r'''Single-character XOR Cipher (Problem 3)
     - Take a hex-encoded string
