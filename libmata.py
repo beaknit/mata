@@ -183,7 +183,9 @@ def single_char_xor_cipher_with_quads(hex_input):
         for y in quads:
             if y in decrypt.upper():
                 if " " in decrypt:
-                    return (x, decrypt, y)
+                    for z in quads:
+                        if z in decrypt.upper().replace(y, ''):
+                            return (x, decrypt, y)
 
 
 def naive_detect_single_char_xor(filename):
