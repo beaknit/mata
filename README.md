@@ -1,4 +1,4 @@
-mata
+Matasano Crypto Challenge scratch space
 ====
 
-mata
+
